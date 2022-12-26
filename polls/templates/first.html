@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Movie Recommandation</title>
+</head>
+<body>
+<form method="post" action="{% url 'homepage' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+    <label for="movie">Select a movie:</label>
+    <select name="movie" id="movie" type="text">
+        <!-- <option value="Avatar">Avatar</option>
+        <option value="Star Wars: Episode I - The Phantom Menace">Star Wars: Episode I - The Phantom Menace</option>
+        <option value="Forrest Gump">Forrest Gump</option> -->
+        {% for value in options %}
+            <option value="{{ value }}">{{ value }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit" name="pred_button" value="Save&Next" class="btn btn-primary">Submit</button>
+</form>
+{% if movie%}
+<h2>Movie</h2>
+{{ movie }}
+{% endif %}
+
+{% if result %}
+<h2>Movies you may also like:</h2>
+{% for string in result %}
+    {{ string }} <br>
+{% endfor %}
+{% endif %}
+
+{% if col_result %}
+<h2>Peole who watched this movie also like:</h2>
+{% for item in col_result %}
+    {{ item }} <br>
+{% endfor %}
+{% endif %}
+</body>
+</html>
