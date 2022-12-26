@@ -4,7 +4,9 @@ import numpy as np
 import pickle
 import pandas as pd
 
-sig = np.load('polls/datasets/sig.npy')
+sig_0 = np.load('polls/datasets/sig_0.npy')
+sig_1 = np.load('polls/datasets/sig_0.npy')
+sig = np.concatenate((sig_0, sig_1), axis=0)
 data = pd.read_csv(r'polls/datasets/clean_data.csv')
 indices = pd.Series(data.index, index=data['original_title'])
 pivot_table = pd.read_pickle('polls/models/pivot.pkl')
